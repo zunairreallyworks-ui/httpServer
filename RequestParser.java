@@ -1,17 +1,32 @@
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class RequestParser {
 
-    private String requestLine;
+    private String rawRequest;
 
-    public RequestParser(String requestLine) {
-        this.requestLine = requestLine;
+    public RequestParser(String rawRequest) {
+        this.rawRequest = rawRequest;
     }
 
     public HttpRequest parse() {
-        if (requestLine == null || requestLine.trim().isEmpty()) {
+        if (rawRequest == null || rawRequest.trim().isEmpty()) {
             return null;
         }
 
-        String[] parts = requestLine.trim().split("\\s+");
+        String[] lines = rawRequest.split("\\r?\\n");
+
+        if (lines.length == 0) {
+            return null;
+        }
+
+        String requestLine = lines[0].trim();
+
+        if (requestLine.isEmpty()) {
+            return null;
+        }
+
+        String[] parts = requestLine.split("\\s+");
 
         if (parts.length != 3) {
             return null;
@@ -33,14 +48,51 @@ public class RequestParser {
             return null;
         }
 
-        if (!method.equals("GET")) {
-            return null;
-        }
-
         if (!version.equals("HTTP/1.1")) {
             return null;
         }
 
-        return new HttpRequest(method, path, version);
+        Map<String, String> headers = new LinkedHashMap<>();
+        int bodyStartIndex = -1;
+
+        for (int i = 1; i < lines.length; i++) {
+            String line = lines[i];
+
+            if (line.trim().isEmpty()) {
+                bodyStartIndex = i + 1;
+                break;
+            }
+
+            int colonIndex = line.indexOf(":");
+
+            if (colonIndex <= 0) {
+                return null;
+            }
+
+            String headerName = line.substring(0, colonIndex).trim();
+            String headerValue = line.substring(colonIndex + 1).trim();
+
+            if (headerName.isEmpty()) {
+                return null;
+            }
+
+            headers.put(headerName, headerValue);
+        }
+
+        StringBuilder bodyBuilder = new StringBuilder();
+
+        if (bodyStartIndex != -1 && bodyStartIndex < lines.length) {
+            for (int i = bodyStartIndex; i < lines.length; i++) {
+                bodyBuilder.append(lines[i]);
+
+                if (i < lines.length - 1) {
+                    bodyBuilder.append("\n");
+                }
+            }
+        }
+
+        String body = bodyBuilder.toString();
+
+        return new HttpRequest(method, path, version, headers, body);
     }
 }

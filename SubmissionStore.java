@@ -28,19 +28,19 @@ public class SubmissionStore {
 
             String record = buildRecord(submissionData);
 
-            BufferedWriter writer = Files.newBufferedWriter(
+            try (BufferedWriter writer = Files.newBufferedWriter(
                     storageFile,
                     StandardOpenOption.CREATE,
                     StandardOpenOption.APPEND
-            );
-
-            writer.write(record);
-            writer.newLine();
-            writer.close();
+            )) {
+                writer.write(record);
+                writer.newLine();
+            }
 
             return true;
 
         } catch (IOException e) {
+            e.printStackTrace();
             return false;
         }
     }

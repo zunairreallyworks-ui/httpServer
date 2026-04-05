@@ -1,0 +1,15 @@
+Name: asas
+Email: a@gmail.com
+Message: s
+--------------------
+Name: asas
+Email: a@gmail.com
+Message: s
+--------------------
+Name: asas
+Email: a@gmail.com
+Message: sfgh
+--------------------
+timestamp=2026-04-05T23:28:58.400 | name=asas | message=sfgh | email=a@gmail.com
+timestamp=2026-04-05T23:29:15.052 | name=asas | message=sfgh | email=a@gmail.com
+timestamp=2026-04-05T23:29:27.172 | name=asas | message=sfghas | email=a@gmail.com

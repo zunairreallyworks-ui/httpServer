@@ -7,7 +7,7 @@ public class StaticFileService {
 
     public StaticFileService() {
     }
-
+    
     public HttpResponse handleGet(String path) {
         SafePathResolver safePathResolver = new SafePathResolver(path);
         Path safePath = safePathResolver.safePath();
