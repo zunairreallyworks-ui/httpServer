@@ -14,6 +14,7 @@ public class RequestParser {
             return null;
         }
 
+
         String[] lines = rawRequest.split("\\r?\\n");
 
         if (lines.length == 0) {
@@ -50,6 +51,12 @@ public class RequestParser {
 
         if (!version.equals("HTTP/1.1")) {
             return null;
+        }
+        String queryString = "";
+        if (path.contains("?")){
+            String[] fullPath = path.split("\\?", 2);
+            path = fullPath[0];
+             queryString = fullPath[1];
         }
 
         Map<String, String> headers = new LinkedHashMap<>();
