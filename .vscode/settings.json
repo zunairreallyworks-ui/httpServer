@@ -1,0 +1,6 @@
+{
+  "[java]": {
+    "editor.defaultFormatter": "Robinsstudio.prettier-java-formatter",
+    "editor.formatOnSave": true
+  }
+}

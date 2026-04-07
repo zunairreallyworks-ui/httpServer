@@ -9,28 +9,36 @@ public class Router {
 
     }
 
-    public HttpResponse route(HttpRequest request) {
-        if (request == null) {
-            return createErrorResponse(400, "Bad Request", "Invalid request");
+public HttpResponse route(HttpRequest request) {
+    if (request == null) {
+        return createErrorResponse(400, "Bad Request", "Invalid request");
+    }
+
+    String method = request.getMethod();
+    String path = request.getPath();
+
+    if ("GET".equals(method)) {
+        if ("/submit".equals(path)) {
+            return formService.handleGet(request);
         }
 
-        String method = request.getMethod();
-        String path = request.getPath();
-        if ("GET".equals(method)) {
-            if ("/".equals(path)) {
-                path = "/index.html";
-            }
-            return staticFileService.handleGet(path);
+        if ("/".equals(path)) {
+            path = "/index.html";
         }
-if ("POST".equals(method)) {
-    if ("/submit".equals(path)) {
-        return formService.handlePost(request);
+
+        return staticFileService.handleGet(path);
     }
-    return createErrorResponse(404, "Not Found", "POST route not found");
+
+    if ("POST".equals(method)) {
+        if ("/submit".equals(path)) {
+            return formService.handlePost(request);
+        }
+
+        return createErrorResponse(404, "Not Found", "POST route not found");
+    }
+
+    return createErrorResponse(405, "Method Not Allowed", "Method not allowed");
 }
-
-        return createErrorResponse(405, "Method Not Allowed", "Method not allowed");
-    }
 
     private HttpResponse createErrorResponse(int statusCode, String reasonPhrase, String body) {
         HttpResponse response = new HttpResponse("HTTP/1.1", statusCode, reasonPhrase, body);

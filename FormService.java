@@ -8,42 +8,56 @@ public class FormService {
     public FormService() {
         this.submissionStore = new SubmissionStore();
     }
-
-    public HttpResponse handlePost(HttpRequest request) {
-        if (request == null) {
-            return createResponse(400, "Bad Request", "Request was null");
-        }
-
-        String body = request.getBody();
-
-        if (body == null || body.trim().isEmpty()) {
-            return createResponse(400, "Bad Request", "Form body is empty");
-        }
-
-        Map<String, String> formData = parseFormData(body);
-
-        String name = getSafeValue(formData.get("name"));
-        String email = getSafeValue(formData.get("email"));
-        String message = getSafeValue(formData.get("message"));
-
-        if (name.isEmpty() || email.isEmpty() || message.isEmpty()) {
-            return createResponse(400, "Bad Request", "All fields are required");
-        }
-
-        Map<String, String> submissionData = new HashMap<>();
-        submissionData.put("name", name);
-        submissionData.put("email", email);
-        submissionData.put("message", message);
-
-        boolean saved = submissionStore.saveSubmission(submissionData);
-
-        if (!saved) {
-            return createResponse(500, "Internal Server Error", "Could not save submission");
-        }
-
-        return createResponse(200, "OK", "Form submitted successfully");
+    private HttpResponse handleFormData(Map<String, String> formData) {
+    if (formData == null || formData.isEmpty()) {
+        return createResponse(400, "Bad Request", "Form data is empty");
     }
 
+    String name = getSafeValue(formData.get("name"));
+    String email = getSafeValue(formData.get("email"));
+    String message = getSafeValue(formData.get("message"));
+
+    if (name.isEmpty() || email.isEmpty() || message.isEmpty()) {
+        return createResponse(400, "Bad Request", "All fields are required");
+    }
+
+    Map<String, String> submissionData = new HashMap<>();
+    submissionData.put("name", name);
+    submissionData.put("email", email);
+    submissionData.put("message", message);
+
+    boolean saved = submissionStore.saveSubmission(submissionData);
+
+    if (!saved) {
+        return createResponse(500, "Internal Server Error", "Could not save submission");
+    }
+
+    return createResponse(200, "OK", "Form submitted successfully");
+}
+    public HttpResponse handlePost(HttpRequest request) {
+    if (request == null) {
+        return createResponse(400, "Bad Request", "Request was null");
+    }
+
+    String body = request.getBody();
+
+    if (body == null || body.trim().isEmpty()) {
+        return createResponse(400, "Bad Request", "Form body is empty");
+    }
+
+    Map<String, String> formData = parseFormData(body);
+
+    return handleFormData(formData);
+}
+public HttpResponse handleGet(HttpRequest request) {
+    if (request == null) {
+        return createResponse(400, "Bad Request", "Request was null");
+    }
+
+    Map<String, String> formData = request.getParameters();
+
+    return handleFormData(formData);
+}
     private Map<String, String> parseFormData(String body) {
         Map<String, String> formData = new HashMap<>();
 
