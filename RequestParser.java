@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -13,7 +14,6 @@ public class RequestParser {
         if (rawRequest == null || rawRequest.trim().isEmpty()) {
             return null;
         }
-
 
         String[] lines = rawRequest.split("\\r?\\n");
 
@@ -52,11 +52,30 @@ public class RequestParser {
         if (!version.equals("HTTP/1.1")) {
             return null;
         }
+
         String queryString = "";
-        if (path.contains("?")){
+        Map<String, String> parameters = new HashMap<>();
+
+        if (path.contains("?")) {
             String[] fullPath = path.split("\\?", 2);
             path = fullPath[0];
-             queryString = fullPath[1];
+            queryString = fullPath[1];
+
+            String[] pairs = queryString.split("&");
+
+            for (String pair : pairs) {
+                if (pair.trim().isEmpty()) {
+                    continue;
+                }
+
+                String[] keyValue = pair.split("=", 2);
+                String key = keyValue[0].trim();
+                String value = keyValue.length > 1 ? keyValue[1].trim() : "";
+
+                if (!key.isEmpty()) {
+                    parameters.put(key, value);
+                }
+            }
         }
 
         Map<String, String> headers = new LinkedHashMap<>();
@@ -100,6 +119,6 @@ public class RequestParser {
 
         String body = bodyBuilder.toString();
 
-        return new HttpRequest(method, path, version, headers, body);
+        return new HttpRequest(method, path, version, headers, body, queryString, parameters);
     }
 }
