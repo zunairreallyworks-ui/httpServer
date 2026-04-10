@@ -12,25 +12,25 @@ public class RequestParser {
 
     public HttpRequest parse() {
         if (rawRequest == null || rawRequest.trim().isEmpty()) {
-            return null;
+            throw new IllegalArgumentException("Request was empty");
         }
 
         String[] lines = rawRequest.split("\\r?\\n");
 
         if (lines.length == 0) {
-            return null;
+            throw new IllegalArgumentException("Request had no lines");
         }
 
         String requestLine = lines[0].trim();
 
         if (requestLine.isEmpty()) {
-            return null;
+            throw new IllegalArgumentException("Request line was empty");
         }
 
         String[] parts = requestLine.split("\\s+");
 
         if (parts.length != 3) {
-            return null;
+            throw new IllegalArgumentException("Malformed request line");
         }
 
         String method = parts[0];
@@ -38,19 +38,19 @@ public class RequestParser {
         String version = parts[2];
 
         if (method.trim().isEmpty()) {
-            return null;
+            throw new IllegalArgumentException("HTTP method was empty");
         }
 
         if (path.trim().isEmpty()) {
-            return null;
+            throw new IllegalArgumentException("Request path was empty");
         }
 
         if (!version.startsWith("HTTP/")) {
-            return null;
+            throw new IllegalArgumentException("Invalid HTTP version format");
         }
 
         if (!version.equals("HTTP/1.1")) {
-            return null;
+            throw new IllegalArgumentException("Only HTTP/1.1 is supported");
         }
 
         String queryString = "";
@@ -81,29 +81,45 @@ public class RequestParser {
         Map<String, String> headers = new LinkedHashMap<>();
         int bodyStartIndex = -1;
 
-        for (int i = 1; i < lines.length; i++) {
-            String line = lines[i];
+     for (int i = 1; i < lines.length; i++) {
+    String line = lines[i];
 
-            if (line.trim().isEmpty()) {
-                bodyStartIndex = i + 1;
-                break;
-            }
+    if (line.trim().isEmpty()) {
+        bodyStartIndex = i + 1;
+        break;
+    }
 
-            int colonIndex = line.indexOf(":");
+    int colonIndex = line.indexOf(":");
 
-            if (colonIndex <= 0) {
-                return null;
-            }
+    if (colonIndex <= 0) {
+        throw new IllegalArgumentException("Invalid header format");
+    }
 
-            String headerName = line.substring(0, colonIndex).trim();
-            String headerValue = line.substring(colonIndex + 1).trim();
+    String headerName = line.substring(0, colonIndex).trim();
+    String headerValue = line.substring(colonIndex + 1).trim();
 
-            if (headerName.isEmpty()) {
-                return null;
-            }
+    if (headerName.isEmpty()) {
+        throw new IllegalArgumentException("Header name was empty");
+    }
 
-            headers.put(headerName, headerValue);
+    if (headerName.equalsIgnoreCase("Content-Length")) {
+        if (headerValue.isEmpty()) {
+            throw new IllegalArgumentException("Content-Length header was empty");
         }
+
+        try {
+            int length = Integer.parseInt(headerValue);
+
+            if (length < 0) {
+                throw new IllegalArgumentException("Content-Length cannot be negative");
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid Content-Length value");
+        }
+    }
+
+    headers.put(headerName, headerValue);
+}
 
         StringBuilder bodyBuilder = new StringBuilder();
 

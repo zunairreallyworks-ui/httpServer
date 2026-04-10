@@ -23,53 +23,106 @@ public class ConnectionHandler {
                 new OutputStreamWriter(socket.getOutputStream())
             )
         ) {
-            String requestLine = reader.readLine();
+            HttpResponse response;
 
-            if (requestLine == null || requestLine.trim().isEmpty()) {
-                return;
-            }
+            try {
+                String requestLine = reader.readLine();
 
-            StringBuilder rawRequest = new StringBuilder();
-            rawRequest.append(requestLine).append("\r\n");
-
-            String line;
-            int contentLength = 0;
-
-            while ((line = reader.readLine()) != null) {
-                rawRequest.append(line).append("\r\n");
-
-                if (line.toLowerCase().startsWith("content-length:")) {
-                    String value = line.substring("Content-Length:".length()).trim();
-                    contentLength = Integer.parseInt(value);
+                if (requestLine == null || requestLine.trim().isEmpty()) {
+                    throw new IllegalArgumentException("Request line was empty");
                 }
 
-                if (line.isEmpty()) {
-                    break;
-                }
-            }
+                StringBuilder rawRequest = new StringBuilder();
+                rawRequest.append(requestLine).append("\r\n");
 
-            if (contentLength > 0) {
-                char[] bodyChars = new char[contentLength];
-                int totalRead = 0;
+                String line;
+                int contentLength = 0;
+                boolean blankLineFound = false;
 
-                while (totalRead < contentLength) {
-                    int charsRead = reader.read(bodyChars, totalRead, contentLength - totalRead);
+                while ((line = reader.readLine()) != null) {
+                    rawRequest.append(line).append("\r\n");
 
-                    if (charsRead == -1) {
-                        break;
+                    if (line.toLowerCase().startsWith("content-length:")) {
+                        String value = line.substring(line.indexOf(":") + 1).trim();
+
+                        try {
+                            contentLength = Integer.parseInt(value);
+                        } catch (NumberFormatException e) {
+                            throw new IllegalArgumentException("Invalid Content-Length header");
+                        }
+
+                        if (contentLength < 0) {
+                            throw new IllegalArgumentException("Content-Length cannot be negative");
+                        }
                     }
 
-                    totalRead += charsRead;
+                    if (line.isEmpty()) {
+                        blankLineFound = true;
+                        break;
+                    }
                 }
 
-                rawRequest.append(bodyChars, 0, totalRead);
+                if (!blankLineFound) {
+                    throw new IllegalArgumentException("Missing blank line after headers");
+                }
+
+                if (contentLength > 0) {
+                    char[] bodyChars = new char[contentLength];
+                    int totalRead = 0;
+
+                    while (totalRead < contentLength) {
+                        int charsRead = reader.read(bodyChars, totalRead, contentLength - totalRead);
+
+                        if (charsRead == -1) {
+                            break;
+                        }
+
+                        totalRead += charsRead;
+                    }
+
+                    if (totalRead < contentLength) {
+                        throw new IllegalArgumentException("Request body was shorter than Content-Length");
+                    }
+
+                    rawRequest.append(bodyChars, 0, totalRead);
+                }
+
+                RequestParser parser = new RequestParser(rawRequest.toString());
+                HttpRequest request = parser.parse();
+
+                Router router = new Router();
+                response = router.route(request);
+
+                if (response == null) {
+                    response = new HttpResponse(
+                        "HTTP/1.1",
+                        500,
+                        "Internal Server Error",
+                        "Router returned no response"
+                    );
+                    response.addHeader("Content-Type", "text/plain; charset=UTF-8");
+                }
+
+            } catch (IllegalArgumentException e) {
+                response = new HttpResponse(
+                    "HTTP/1.1",
+                    400,
+                    "Bad Request",
+                    e.getMessage()
+                );
+                response.addHeader("Content-Type", "text/plain; charset=UTF-8");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+                response = new HttpResponse(
+                    "HTTP/1.1",
+                    500,
+                    "Internal Server Error",
+                    "An internal server error occurred"
+                );
+                response.addHeader("Content-Type", "text/plain; charset=UTF-8");
             }
-
-            RequestParser parser = new RequestParser(rawRequest.toString());
-            HttpRequest request = parser.parse();
-
-            Router router = new Router();
-            HttpResponse response = router.route(request);
 
             writer.write(response.buildResponse());
             writer.flush();

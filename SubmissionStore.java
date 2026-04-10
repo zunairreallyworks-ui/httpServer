@@ -22,6 +22,7 @@ public class SubmissionStore {
 
         try {
             Path parent = storageFile.getParent();
+
             if (parent != null) {
                 Files.createDirectories(parent);
             }
@@ -29,9 +30,9 @@ public class SubmissionStore {
             String record = buildRecord(submissionData);
 
             try (BufferedWriter writer = Files.newBufferedWriter(
-                    storageFile,
-                    StandardOpenOption.CREATE,
-                    StandardOpenOption.APPEND
+                storageFile,
+                StandardOpenOption.CREATE,
+                StandardOpenOption.APPEND
             )) {
                 writer.write(record);
                 writer.newLine();

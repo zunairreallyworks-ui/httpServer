@@ -1,3 +1,6 @@
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,67 +11,79 @@ public class FormService {
     public FormService() {
         this.submissionStore = new SubmissionStore();
     }
-    private HttpResponse handleFormData(Map<String, String> formData) {
-    if (formData == null || formData.isEmpty()) {
-        return createResponse(400, "Bad Request", "Form data is empty");
-    }
 
-    String name = getSafeValue(formData.get("name"));
-    String email = getSafeValue(formData.get("email"));
-    String message = getSafeValue(formData.get("message"));
-
-    if (name.isEmpty() || email.isEmpty() || message.isEmpty()) {
-        return createResponse(400, "Bad Request", "All fields are required");
-    }
-
-    Map<String, String> submissionData = new HashMap<>();
-    submissionData.put("name", name);
-    submissionData.put("email", email);
-    submissionData.put("message", message);
-
-    boolean saved = submissionStore.saveSubmission(submissionData);
-
-    if (!saved) {
-        return createResponse(500, "Internal Server Error", "Could not save submission");
-    }
-
-    return createResponse(200, "OK", "Form submitted successfully");
-}
     public HttpResponse handlePost(HttpRequest request) {
-    if (request == null) {
-        return createResponse(400, "Bad Request", "Request was null");
+        if (request == null) {
+            return createResponse(400, "Bad Request", "Request was null");
+        }
+
+        String body = request.getBody();
+
+        if (body == null || body.trim().isEmpty()) {
+            return createResponse(400, "Bad Request", "Form body is empty");
+        }
+
+        Map<String, String> formData = parseFormData(body);
+        return handleFormData(formData);
     }
 
-    String body = request.getBody();
+    public HttpResponse handleGet(HttpRequest request) {
+        if (request == null) {
+            return createResponse(400, "Bad Request", "Request was null");
+        }
 
-    if (body == null || body.trim().isEmpty()) {
-        return createResponse(400, "Bad Request", "Form body is empty");
+        Map<String, String> formData = request.getParameters();
+
+        if (formData == null || formData.isEmpty()) {
+            return createResponse(400, "Bad Request", "Form data is empty");
+        }
+
+        return handleFormData(formData);
     }
 
-    Map<String, String> formData = parseFormData(body);
+    private HttpResponse handleFormData(Map<String, String> formData) {
+        if (formData == null || formData.isEmpty()) {
+            return createResponse(400, "Bad Request", "Form data is empty");
+        }
 
-    return handleFormData(formData);
-}
-public HttpResponse handleGet(HttpRequest request) {
-    if (request == null) {
-        return createResponse(400, "Bad Request", "Request was null");
+        String name = getSafeValue(formData.get("name"));
+        String email = getSafeValue(formData.get("email"));
+        String message = getSafeValue(formData.get("message"));
+
+        if (name.isEmpty() || email.isEmpty() || message.isEmpty()) {
+            return createResponse(400, "Bad Request", "All fields are required");
+        }
+
+        Map<String, String> submissionData = new HashMap<>();
+        submissionData.put("name", name);
+        submissionData.put("email", email);
+        submissionData.put("message", message);
+
+        boolean saved = submissionStore.saveSubmission(submissionData);
+
+        if (!saved) {
+            return createResponse(500, "Internal Server Error", "Could not save submission");
+        }
+
+        return createResponse(200, "OK", "Form submitted successfully");
     }
 
-    Map<String, String> formData = request.getParameters();
-
-    return handleFormData(formData);
-}
     private Map<String, String> parseFormData(String body) {
         Map<String, String> formData = new HashMap<>();
 
         String[] pairs = body.split("&");
 
         for (String pair : pairs) {
+            if (pair == null || pair.trim().isEmpty()) {
+                continue;
+            }
+
             String[] keyValue = pair.split("=", 2);
 
-            if (keyValue.length == 2) {
-                String key = decodeFormValue(keyValue[0]);
-                String value = decodeFormValue(keyValue[1]);
+            String key = decodeFormValue(keyValue[0]);
+            String value = keyValue.length > 1 ? decodeFormValue(keyValue[1]) : "";
+
+            if (!key.isEmpty()) {
                 formData.put(key, value);
             }
         }
@@ -76,26 +91,29 @@ public HttpResponse handleGet(HttpRequest request) {
         return formData;
     }
 
-    private String decodeFormValue(String value) {
-        value = value.replace("+", " ");
-        value = value.replace("%40", "@");
-        value = value.replace("%2E", ".");
-        value = value.replace("%21", "!");
-        value = value.replace("%3F", "?");
-        value = value.replace("%2C", ",");
-        return value;
+private String decodeFormValue(String value) {
+    if (value == null) {
+        return "";
     }
+
+    try {
+        return URLDecoder.decode(value, "UTF-8");
+    } catch (UnsupportedEncodingException e) {
+        throw new IllegalArgumentException("Invalid form encoding");
+    }
+}
 
     private String getSafeValue(String value) {
         if (value == null) {
             return "";
         }
+
         return value.trim();
     }
 
     private HttpResponse createResponse(int statusCode, String reasonPhrase, String body) {
         HttpResponse response = new HttpResponse("HTTP/1.1", statusCode, reasonPhrase, body);
-        response.addHeader("Content-Type", "text/plain");
+        response.addHeader("Content-Type", "text/plain; charset=UTF-8");
         return response;
     }
 }

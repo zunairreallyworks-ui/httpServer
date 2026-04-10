@@ -14,37 +14,35 @@ public class SafePathResolver {
 
     public Path safePath() {
         if (requestedPath == null || requestedPath.trim().isEmpty()) {
-            System.out.println("Error: path is missing");
             return null;
         }
 
-        String cleanedPath = requestedPath;
+        String cleanedPath = requestedPath.trim();
 
-        if (cleanedPath.startsWith("/") && cleanedPath.length() > 1) {
-            cleanedPath = cleanedPath.substring(1);
-        } else {
-            System.out.println("Error: invalid path format");
+        if (!cleanedPath.startsWith("/")) {
             return null;
+        }
+
+        if (cleanedPath.equals("/")) {
+            cleanedPath = "index.html";
+        } else {
+            cleanedPath = cleanedPath.substring(1);
         }
 
         Path resolvedPath = base.resolve(cleanedPath).normalize();
 
         if (!resolvedPath.startsWith(base)) {
-            System.out.println("Rejected traversal attack");
             return null;
         }
 
         if (!Files.exists(resolvedPath)) {
-            System.out.println("File does not exist");
             return null;
         }
 
         if (!Files.isRegularFile(resolvedPath)) {
-            System.out.println("Irregular file");
             return null;
         }
 
-        System.out.println("Valid and found");
         return resolvedPath;
     }
 }
