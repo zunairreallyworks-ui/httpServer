@@ -20,6 +20,8 @@ public class Router {
             return createErrorResponse(400, "Bad Request", "Missing method or path");
         }
 
+        AppLogger.logRequest(method, path);
+
         if ("GET".equals(method)) {
             if ("/".equals(path)) {
                 path = "/index.html";
@@ -37,9 +39,11 @@ public class Router {
                 return formService.handlePost(request);
             }
 
+            AppLogger.logNotFound(path);
             return createErrorResponse(404, "Not Found", "POST route not found");
         }
 
+        AppLogger.warning("405 Method Not Allowed: " + method + " " + path);
         return createErrorResponse(405, "Method Not Allowed", "Method not allowed");
     }
 

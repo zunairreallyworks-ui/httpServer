@@ -1,0 +1,89 @@
+[2026-04-11 01:04:29] [INFO] Server started on port 8080
+[2026-04-11 01:05:09] [INFO] Server started on port 8080
+[2026-04-11 01:05:30] [ERROR] Internal error: Server failed in MainServer | Exception: BindException - Address already in use: JVM_Bind
+[2026-04-11 01:05:30] [INFO] Server stopped
+[2026-04-15 19:40:49] [INFO] Server started on port 8080
+[2026-04-15 19:40:58] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=52993,localport=8080]
+[2026-04-15 19:40:58] [INFO] Request received: method=GET, path=/
+[2026-04-15 19:40:58] [INFO] File served: C:\Users\User\Desktop\httpServer\public\index.html
+[2026-04-15 19:40:58] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=54823,localport=8080]
+[2026-04-15 19:40:58] [INFO] Request received: method=GET, path=/favicon.ico
+[2026-04-15 19:40:58] [WARNING] 404 Not Found: /favicon.ico
+[2026-04-15 19:41:02] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=54567,localport=8080]
+[2026-04-15 19:41:02] [INFO] Request received: method=GET, path=/contact.html
+[2026-04-15 19:41:02] [INFO] File served: C:\Users\User\Desktop\httpServer\public\contact.html
+[2026-04-15 19:41:02] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=59028,localport=8080]
+[2026-04-15 19:41:04] [INFO] Request received: method=GET, path=/index.html
+[2026-04-15 19:41:04] [INFO] File served: C:\Users\User\Desktop\httpServer\public\index.html
+[2026-04-15 19:41:04] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=61400,localport=8080]
+[2026-04-15 19:41:16] [INFO] Request received: method=GET, path=/contact.html
+[2026-04-15 19:41:16] [INFO] File served: C:\Users\User\Desktop\httpServer\public\contact.html
+[2026-04-15 19:41:16] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=59167,localport=8080]
+[2026-04-15 19:41:38] [INFO] Request received: method=POST, path=/submit
+[2026-04-15 19:41:38] [INFO] Submission stored: timestamp=2026-04-15T19:41:38.375 | name=asas | message=gfghfgfghhg | email=a@gmail.com
+[2026-04-15 19:41:38] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=49341,localport=8080]
+[2026-04-15 19:44:22] [WARNING] Malformed request: Request line was empty
+[2026-04-17 20:18:52] [INFO] Server started on port 8080
+[2026-04-17 20:18:56] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=64345,localport=8080]
+[2026-04-17 20:18:56] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=58319,localport=8080]
+[2026-04-17 20:18:56] [INFO] Request received: method=GET, path=/index.html
+[2026-04-17 20:18:56] [INFO] File served: C:\Users\User\Desktop\httpServer\public\index.html
+[2026-04-17 20:18:56] [INFO] Request received: method=GET, path=/favicon.ico
+[2026-04-17 20:18:56] [WARNING] 404 Not Found: /favicon.ico
+[2026-04-17 20:19:07] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=57507,localport=8080]
+[2026-04-17 20:19:07] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=53616,localport=8080]
+[2026-04-17 20:19:07] [INFO] Request received: method=GET, path=/contact.html
+[2026-04-17 20:19:07] [INFO] File served: C:\Users\User\Desktop\httpServer\public\contact.html
+[2026-04-17 20:27:35] [WARNING] Malformed request: Request line was empty
+[2026-04-18 05:24:54] [INFO] Client connected: Socket[addr=/192.168.0.207,port=55678,localport=8080]
+[2026-04-18 05:25:55] [WARNING] Malformed request: Missing blank line after headers
+[2026-04-18 05:27:34] [INFO] Client connected: Socket[addr=/192.168.0.207,port=55679,localport=8080]
+[2026-04-18 05:28:20] [ERROR] Internal error: Unexpected failure in ConnectionHandler | Exception: SocketException - Connection reset
+[2026-04-18 05:28:20] [ERROR] Internal error: I/O failure in ConnectionHandler | Exception: SocketException - Connection reset by peer: socket write error
+[2026-04-18 05:29:21] [INFO] Client connected: Socket[addr=/192.168.0.10,port=51603,localport=8080]
+[2026-04-18 05:29:21] [INFO] Client connected: Socket[addr=/192.168.0.10,port=60933,localport=8080]
+[2026-04-18 05:29:21] [INFO] Request received: method=GET, path=/
+[2026-04-18 05:29:21] [INFO] File served: C:\Users\User\Desktop\httpServer\public\index.html
+[2026-04-18 05:29:21] [INFO] Request received: method=GET, path=/favicon.ico
+[2026-04-18 05:29:21] [WARNING] 404 Not Found: /favicon.ico
+[2026-04-18 05:31:11] [INFO] Client connected: Socket[addr=/192.168.0.207,port=55681,localport=8080]
+[2026-04-18 05:31:15] [WARNING] Malformed request: Missing blank line after headers
+[2026-04-18 05:31:16] [INFO] Client connected: Socket[addr=/192.168.0.207,port=55682,localport=8080]
+[2026-04-18 05:31:19] [WARNING] Malformed request: Missing blank line after headers
+[2026-04-18 05:32:58] [INFO] Client connected: Socket[addr=/192.168.0.207,port=55684,localport=8080]
+[2026-04-18 05:33:19] [INFO] Server started on port 8080
+[2026-04-18 05:33:28] [INFO] Client connected: Socket[addr=/192.168.0.207,port=55687,localport=8080]
+[2026-04-18 05:33:28] [WARNING] Malformed request: Malformed request line
+[2026-04-18 05:33:28] [WARNING] Malformed request: Malformed request line
+[2026-04-18 05:33:28] [INFO] Client connected: Socket[addr=/192.168.0.207,port=55688,localport=8080]
+[2026-04-18 05:34:28] [WARNING] Malformed request: Missing blank line after headers
+[2026-04-18 05:34:47] [INFO] Client connected: Socket[addr=/192.168.0.207,port=55689,localport=8080]
+[2026-04-18 05:34:47] [INFO] Request received: method=GET, path=/
+[2026-04-18 05:34:47] [INFO] File served: C:\Users\User\Desktop\httpServer\public\index.html
+[2026-04-18 05:34:47] [INFO] Client connected: Socket[addr=/192.168.0.207,port=55690,localport=8080]
+[2026-04-18 05:34:47] [INFO] Request received: method=GET, path=/favicon.ico
+[2026-04-18 05:34:47] [WARNING] 404 Not Found: /favicon.ico
+[2026-04-18 05:34:55] [INFO] Client connected: Socket[addr=/192.168.0.207,port=55691,localport=8080]
+[2026-04-18 05:34:55] [INFO] Request received: method=GET, path=/contact.html
+[2026-04-18 05:34:55] [INFO] File served: C:\Users\User\Desktop\httpServer\public\contact.html
+[2026-04-18 05:38:11] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=50171,localport=8080]
+[2026-04-18 05:38:11] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=61848,localport=8080]
+[2026-04-18 05:38:11] [INFO] Request received: method=GET, path=/data/submissions.txt
+[2026-04-18 05:38:11] [WARNING] 404 Not Found: /data/submissions.txt
+[2026-04-18 05:38:28] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=52037,localport=8080]
+[2026-04-18 05:38:28] [INFO] Request received: method=GET, path=/data/submissions.txt
+[2026-04-18 05:38:28] [WARNING] 404 Not Found: /data/submissions.txt
+[2026-04-18 05:38:33] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=55345,localport=8080]
+[2026-04-18 05:38:34] [INFO] Request received: method=GET, path=/Windows/System32/drivers/etc/hosts
+[2026-04-18 05:38:34] [WARNING] 404 Not Found: /Windows/System32/drivers/etc/hosts
+[2026-04-18 05:38:47] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=51841,localport=8080]
+[2026-04-18 05:38:47] [INFO] Request received: method=GET, path=/data/submissions.txt
+[2026-04-18 05:38:47] [WARNING] 404 Not Found: /data/submissions.txt
+[2026-04-18 05:38:57] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=52893,localport=8080]
+[2026-04-18 05:38:57] [INFO] Request received: method=GET, path=/MainServer.java
+[2026-04-18 05:38:57] [WARNING] 404 Not Found: /MainServer.java
+[2026-04-18 05:40:28] [WARNING] Malformed request: Request line was empty
+[2026-04-18 05:42:46] [INFO] Client connected: Socket[addr=/192.168.0.10,port=55573,localport=8080]
+[2026-04-18 05:42:46] [INFO] Client connected: Socket[addr=/192.168.0.10,port=59936,localport=8080]
+[2026-04-18 05:42:46] [INFO] Request received: method=GET, path=/index.html
+[2026-04-18 05:42:46] [INFO] File served: C:\Users\User\Desktop\httpServer\public\index.html

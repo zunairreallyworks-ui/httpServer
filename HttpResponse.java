@@ -4,11 +4,11 @@ import java.util.Map;
 
 public class HttpResponse {
 
-    private String httpVersion;
-    private int statusCode;
-    private String reasonPhrase;
-    private Map<String, String> headers;
-    private String body;
+    private final String httpVersion;
+    private final int statusCode;
+    private final String reasonPhrase;
+    private final Map<String, String> headers;
+    private final String body;
 
     public HttpResponse(String httpVersion, int statusCode, String reasonPhrase, String body) {
         this.httpVersion = httpVersion;

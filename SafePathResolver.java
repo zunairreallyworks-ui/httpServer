@@ -32,6 +32,7 @@ public class SafePathResolver {
         Path resolvedPath = base.resolve(cleanedPath).normalize();
 
         if (!resolvedPath.startsWith(base)) {
+            AppLogger.logUnsafePathRejected(requestedPath);
             return null;
         }
 

@@ -5,15 +5,20 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
-public class ConnectionHandler {
-    private Socket socket;
+public class ConnectionHandler implements Runnable {
+    private final Socket socket;
 
     public ConnectionHandler(Socket socket) {
         this.socket = socket;
     }
 
+    @Override
+    public void run() {
+        handle();
+    }
+
     public void handle() {
-        System.out.println("Connected: " + socket);
+        AppLogger.logClientConnected(socket.toString());
 
         try (
             BufferedReader reader = new BufferedReader(
@@ -27,7 +32,7 @@ public class ConnectionHandler {
 
             try {
                 String requestLine = reader.readLine();
-
+                System.out.println("REQUEST LINE = [" + requestLine + "]");
                 if (requestLine == null || requestLine.trim().isEmpty()) {
                     throw new IllegalArgumentException("Request line was empty");
                 }
@@ -104,6 +109,8 @@ public class ConnectionHandler {
                 }
 
             } catch (IllegalArgumentException e) {
+                AppLogger.logMalformedRequest(e.getMessage());
+
                 response = new HttpResponse(
                     "HTTP/1.1",
                     400,
@@ -113,6 +120,7 @@ public class ConnectionHandler {
                 response.addHeader("Content-Type", "text/plain; charset=UTF-8");
 
             } catch (Exception e) {
+                AppLogger.logInternalError("Unexpected failure in ConnectionHandler", e);
                 e.printStackTrace();
 
                 response = new HttpResponse(
@@ -128,11 +136,13 @@ public class ConnectionHandler {
             writer.flush();
 
         } catch (IOException e) {
+            AppLogger.logInternalError("I/O failure in ConnectionHandler", e);
             e.printStackTrace();
         } finally {
             try {
                 socket.close();
             } catch (IOException e) {
+                AppLogger.logInternalError("Failed to close socket", e);
                 e.printStackTrace();
             }
         }

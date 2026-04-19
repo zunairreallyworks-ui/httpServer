@@ -13,6 +13,8 @@ public class StaticFileService {
         Path safePath = safePathResolver.safePath();
 
         if (safePath == null) {
+            AppLogger.logNotFound(path);
+
             HttpResponse response = new HttpResponse(
                 "HTTP/1.1",
                 404,
@@ -32,6 +34,8 @@ public class StaticFileService {
                 fileContent.append(line).append("\n");
             }
 
+            AppLogger.logFileServed(safePath.toString());
+
             HttpResponse response = new HttpResponse(
                 "HTTP/1.1",
                 200,
@@ -42,6 +46,8 @@ public class StaticFileService {
             return response;
 
         } catch (IOException e) {
+            AppLogger.logInternalError("Failed to read file: " + safePath, e);
+
             HttpResponse response = new HttpResponse(
                 "HTTP/1.1",
                 500,

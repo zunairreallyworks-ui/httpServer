@@ -9,6 +9,7 @@ import java.util.Map;
 
 public class SubmissionStore {
 
+    private static final Object FILE_LOCK = new Object();
     private final Path storageFile;
 
     public SubmissionStore() {
@@ -20,29 +21,33 @@ public class SubmissionStore {
             return false;
         }
 
-        try {
-            Path parent = storageFile.getParent();
+        synchronized (FILE_LOCK) {
+            try {
+                Path parent = storageFile.getParent();
 
-            if (parent != null) {
-                Files.createDirectories(parent);
+                if (parent != null) {
+                    Files.createDirectories(parent);
+                }
+
+                String record = buildRecord(submissionData);
+
+                try (BufferedWriter writer = Files.newBufferedWriter(
+                    storageFile,
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.APPEND
+                )) {
+                    writer.write(record);
+                    writer.newLine();
+                }
+
+                AppLogger.logSubmissionStored(record);
+                return true;
+
+            } catch (IOException e) {
+                AppLogger.logInternalError("Failed to store submission", e);
+                e.printStackTrace();
+                return false;
             }
-
-            String record = buildRecord(submissionData);
-
-            try (BufferedWriter writer = Files.newBufferedWriter(
-                storageFile,
-                StandardOpenOption.CREATE,
-                StandardOpenOption.APPEND
-            )) {
-                writer.write(record);
-                writer.newLine();
-            }
-
-            return true;
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
         }
     }
 
