@@ -1,0 +1,12 @@
+# Ignore runtime logs
+logs/
+*.log
+
+# Ignore saved form submissions/data
+data/
+
+# Ignore compiled Java files
+*.class
+
+# Ignore jar builds if you want
+*.jar

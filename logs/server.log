@@ -87,3 +87,117 @@
 [2026-04-18 05:42:46] [INFO] Client connected: Socket[addr=/192.168.0.10,port=59936,localport=8080]
 [2026-04-18 05:42:46] [INFO] Request received: method=GET, path=/index.html
 [2026-04-18 05:42:46] [INFO] File served: C:\Users\User\Desktop\httpServer\public\index.html
+[2026-04-21 00:21:03] [INFO] Server started on port 8080
+[2026-04-21 00:21:11] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=51205,localport=8080]
+[2026-04-21 00:21:11] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=54234,localport=8080]
+[2026-04-21 00:21:11] [INFO] Request received: method=GET, path=/submit
+[2026-04-21 00:21:11] [INFO] Request received: method=GET, path=/favicon.ico
+[2026-04-21 00:21:11] [WARNING] 404 Not Found: /favicon.ico
+[2026-04-21 00:21:21] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=61434,localport=8080]
+[2026-04-21 00:21:21] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=59084,localport=8080]
+[2026-04-21 00:21:21] [INFO] Request received: method=GET, path=/submit
+[2026-04-21 00:21:26] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=55325,localport=8080]
+[2026-04-21 00:21:26] [INFO] Request received: method=GET, path=/
+[2026-04-21 00:21:26] [INFO] File served: C:\Users\User\Desktop\httpServer\public\index.html
+[2026-04-21 00:21:28] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=54671,localport=8080]
+[2026-04-21 00:21:28] [INFO] Request received: method=GET, path=/contact.html
+[2026-04-21 00:21:28] [INFO] File served: C:\Users\User\Desktop\httpServer\public\contact.html
+[2026-04-21 00:21:52] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=53909,localport=8080]
+[2026-04-21 00:21:52] [INFO] Request received: method=GET, path=/submit
+[2026-04-21 00:21:52] [INFO] Submission stored: timestamp=2026-04-21T00:21:52.485 | name=Zunair | message=hello | email=shsh.shsh@gmail.com
+[2026-04-21 00:22:17] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=54317,localport=8080]
+[2026-04-21 00:22:17] [INFO] Request received: method=GET, path=/test123.html
+[2026-04-21 00:22:17] [WARNING] 404 Not Found: /test123.html
+[2026-04-21 00:22:46] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=60350,localport=8080]
+[2026-04-21 00:22:46] [INFO] Request received: method=GET, path=/docs/help.html
+[2026-04-21 00:22:46] [WARNING] 404 Not Found: /docs/help.html
+[2026-04-21 00:24:33] [WARNING] Malformed request: Request line was empty
+[2026-04-21 04:58:57] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=55101,localport=8080]
+[2026-04-21 04:58:57] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=49225,localport=8080]
+[2026-04-21 04:58:57] [INFO] Request received: method=GET, path=/index.html
+[2026-04-21 04:58:57] [INFO] File served: C:\Users\User\Desktop\httpServer\public\index.html
+[2026-04-21 04:59:19] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=62629,localport=8080]
+[2026-04-21 04:59:19] [INFO] Request received: method=GET, path=/doesnotexist.html
+[2026-04-21 04:59:19] [WARNING] 404 Not Found: /doesnotexist.html
+[2026-04-21 05:00:33] [WARNING] Malformed request: Request line was empty
+[2026-04-21 05:01:37] [INFO] Server started on port 8080
+[2026-04-21 05:01:40] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=61611,localport=8080]
+[2026-04-21 05:01:40] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=60480,localport=8080]
+[2026-04-21 05:01:52] [INFO] Request received: method=GET, path=/.well-known/appspecific/com.chrome.devtools.json
+[2026-04-21 05:01:52] [WARNING] 404 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+[2026-04-21 05:02:23] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=62224,localport=8080]
+[2026-04-21 05:02:23] [INFO] Request received: method=GET, path=/doesnotexist.html
+[2026-04-21 05:02:23] [WARNING] 404 Not Found: /doesnotexist.html
+[2026-04-21 05:02:34] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=54487,localport=8080]
+[2026-04-21 05:02:34] [INFO] Request received: method=PUT, path=/index.html
+[2026-04-21 05:02:34] [WARNING] 405 Method Not Allowed: PUT /index.html
+[2026-04-21 05:02:40] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=64585,localport=8080]
+[2026-04-21 05:02:40] [INFO] Request received: method=GET, path=/index.html
+[2026-04-21 05:02:40] [INFO] File served: C:\Users\User\Desktop\httpServer\public\index.html
+[2026-04-21 05:03:33] [WARNING] Malformed request: Request line was empty
+[2026-04-21 11:55:11] [INFO] Server started on port 8080
+[2026-04-21 12:17:24] [ERROR] Internal error: Server failed in MainServer | Exception: BindException - Address already in use: bind
+[2026-04-21 12:17:24] [INFO] Server stopped
+[2026-04-21 12:17:31] [ERROR] Internal error: Server failed in MainServer | Exception: BindException - Address already in use: bind
+[2026-04-21 12:17:31] [INFO] Server stopped
+[2026-04-21 12:17:32] [ERROR] Internal error: Server failed in MainServer | Exception: BindException - Address already in use: bind
+[2026-04-21 12:17:32] [INFO] Server stopped
+[2026-04-21 12:18:29] [ERROR] Internal error: Server failed in MainServer | Exception: BindException - Address already in use: bind
+[2026-04-21 12:18:29] [INFO] Server stopped
+[2026-04-21 12:19:07] [ERROR] Internal error: Server failed in MainServer | Exception: BindException - Address already in use: bind
+[2026-04-21 12:19:07] [INFO] Server stopped
+[2026-04-21 12:19:13] [ERROR] Internal error: Server failed in MainServer | Exception: BindException - Address already in use: bind
+[2026-04-21 12:19:13] [INFO] Server stopped
+[2026-04-21 12:19:14] [ERROR] Internal error: Server failed in MainServer | Exception: BindException - Address already in use: bind
+[2026-04-21 12:19:14] [INFO] Server stopped
+[2026-04-21 12:21:05] [INFO] Server started on port 8080
+[2026-04-21 12:21:08] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=57445,localport=8080]
+[2026-04-21 12:21:08] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=63534,localport=8080]
+[2026-04-21 12:21:08] [INFO] Request received: method=GET, path=/
+[2026-04-21 12:21:08] [INFO] File served: C:\Users\User\Desktop\httpServer\public\index.html
+[2026-04-21 12:21:09] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=64074,localport=8080]
+[2026-04-21 12:21:09] [INFO] Request received: method=GET, path=/contact.html
+[2026-04-21 12:21:09] [INFO] File served: C:\Users\User\Desktop\httpServer\public\contact.html
+[2026-04-21 12:21:28] [INFO] Server started on port 8080
+[2026-04-21 12:21:34] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=65408,localport=8080]
+[2026-04-21 12:21:34] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=61670,localport=8080]
+[2026-04-21 12:21:34] [INFO] Request received: method=GET, path=/contact.html
+[2026-04-21 12:21:34] [INFO] File served: C:\Users\User\Desktop\httpServer\public\contact.html
+[2026-04-21 12:21:35] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=55236,localport=8080]
+[2026-04-21 12:21:35] [INFO] Request received: method=GET, path=/contact.html
+[2026-04-21 12:21:35] [INFO] File served: C:\Users\User\Desktop\httpServer\public\contact.html
+[2026-04-21 12:21:43] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=63812,localport=8080]
+[2026-04-21 12:21:43] [INFO] Request received: method=GET, path=/contact.html
+[2026-04-21 12:21:43] [INFO] File served: C:\Users\User\Desktop\httpServer\public\contact.html
+[2026-04-21 12:21:50] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=56466,localport=8080]
+[2026-04-21 12:21:50] [INFO] Request received: method=POST, path=/submit
+[2026-04-21 12:21:50] [INFO] Submission stored: timestamp=2026-04-21T12:21:50.920337900 | name=asas | message=asasasasas | email=a@gmail.com
+[2026-04-21 12:21:54] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=58199,localport=8080]
+[2026-04-21 12:21:54] [INFO] Request received: method=GET, path=/index.html
+[2026-04-21 12:21:54] [INFO] File served: C:\Users\User\Desktop\httpServer\public\index.html
+[2026-04-21 12:21:55] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=52269,localport=8080]
+[2026-04-21 12:21:55] [INFO] Request received: method=GET, path=/contact.html
+[2026-04-21 12:21:55] [INFO] File served: C:\Users\User\Desktop\httpServer\public\contact.html
+[2026-04-21 12:22:58] [INFO] Server started on port 8080
+[2026-04-21 12:23:02] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=55033,localport=8080]
+[2026-04-21 12:23:02] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=53546,localport=8080]
+[2026-04-21 12:23:02] [INFO] Request received: method=GET, path=/index.html
+[2026-04-21 12:23:02] [INFO] File served: C:\Users\User\Desktop\httpServer\public\index.html
+[2026-04-21 12:23:04] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=63956,localport=8080]
+[2026-04-21 12:23:04] [INFO] Request received: method=GET, path=/contact.html
+[2026-04-21 12:23:04] [INFO] File served: C:\Users\User\Desktop\httpServer\public\contact.html
+[2026-04-21 12:23:07] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=62650,localport=8080]
+[2026-04-21 12:23:07] [INFO] Request received: method=GET, path=/index.html
+[2026-04-21 12:23:07] [INFO] File served: C:\Users\User\Desktop\httpServer\public\index.html
+[2026-04-21 12:23:11] [INFO] Client connected: Socket[addr=/0:0:0:0:0:0:0:1,port=56117,localport=8080]
+[2026-04-21 12:23:11] [INFO] Request received: method=GET, path=/contact.html
+[2026-04-21 12:23:11] [INFO] File served: C:\Users\User\Desktop\httpServer\public\contact.html
+[2026-04-21 12:23:52] [INFO] Server started on port 8080
+[2026-04-21 12:36:24] [INFO] Server started on port 8080
+[2026-04-21 12:37:26] [INFO] Client connected: Socket[addr=/127.0.0.1,port=41392,localport=8080]
+[2026-04-21 12:37:26] [INFO] Request received: method=GET, path=/
+[2026-04-21 12:37:26] [INFO] File served: /media/sf_httpServer/public/index.html
+[2026-04-21 12:37:26] [INFO] Client connected: Socket[addr=/127.0.0.1,port=41394,localport=8080]
+[2026-04-21 12:37:26] [INFO] Request received: method=GET, path=/favicon.ico
+[2026-04-21 12:37:26] [WARNING] 404 Not Found: /favicon.ico
+[2026-04-21 13:46:00] [INFO] Server started on port 8080
